@@ -25,6 +25,7 @@ const Membership = () => {
           ))}
         </div>
       )}
+  
     </div>
   );
 };
