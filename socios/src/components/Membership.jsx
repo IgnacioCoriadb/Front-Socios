@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllMembership } from '../redux/membershipActions/actions';
+import { getAllMembership } from '../redux/membership/actions';
 import { format } from 'date-fns';
 
 const Membership = () => {
   const dispatch = useDispatch();
-  const membershipData = useSelector(state => state.membershipData);
+  const membershipData = useSelector(state => state.membership.membershipData);
   const loading = useSelector(state => state.loading);
   const error = useSelector(state => state.error);
 

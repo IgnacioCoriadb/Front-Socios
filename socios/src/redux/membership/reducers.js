@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getAllMembership } from './membershipActions/actions';
+import { getAllMembership } from './actions';
 
 const initialState = {
   membershipData: null,
