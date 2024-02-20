@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import rootReducer from './membership/reducers'; 
+import membership from './membership/reducers'; 
 
 const store = configureStore({
   reducer: {
-    membership:rootReducer
+    membership:membership
   },
 });
 
