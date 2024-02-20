@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllMembership } from '../redux/membership/actions';
+import { getAllMembership } from '../../redux/membership/actions';
 import { format } from 'date-fns';
 
 const Membership = () => {

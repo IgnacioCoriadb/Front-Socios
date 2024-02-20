@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import Membership from './components/Membership';
+import Membership from './components/membership/Membership';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
