@@ -10,3 +10,11 @@ export const getAllPeople = createAsyncThunk(
     return response.data;
   }
 );
+
+export const getPersonById = createAsyncThunk(
+  'getPersonById/fetch',
+  async(id)=>{
+    const response = await axios.get(`${apiUrl}/people/${id}`);
+    return response.data;
+  }
+) 

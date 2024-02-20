@@ -3,8 +3,6 @@ import { getAllPeople } from '../../redux/people/actions';
 import React, { useEffect ,useState} from 'react';
 import { format } from 'date-fns';
 import FormPeople from './formPeople';
-import { Modal, Button } from 'react-bootstrap';
-
 
 export default function People() {
 
@@ -14,16 +12,15 @@ const error = useSelector(state => state.people.error);
 const loading = useSelector(state => state.people.loading);
 const [idSelected, setIdSelected] =useState(null);
 
+//abrir y cerrar modal
 const [showModal, setShowModal] = useState(false);
-
 const handleClose = () => setShowModal(false);
 const handleShow = () => setShowModal(true);
 
 
-
 //enviar id a editar
 const handlePerson=(id)=>{
-  console.log(id);
+  // console.log(id);
   handleShow();
   setIdSelected(id);
 }
@@ -74,7 +71,7 @@ useEffect(() => {
         </tbody>
       </table>  
       <div>
-        <FormPeople showModal={showModal} handleClose={handleClose}></FormPeople>
+        <FormPeople showModal={showModal} handleClose={handleClose} idSelected={idSelected}></FormPeople>
       </div>
     </div>
   )
