@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getPersonById } from '../../redux/people/actions';
+import { getPersonById ,updatePerson,getAllPeople} from '../../redux/people/actions';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { Modal, Button } from 'react-bootstrap';
@@ -19,7 +19,7 @@ export default function FormPeople({showModal,handleClose,idSelected}) {
 
 
     const initialValues = {
-        firstName: personById?.name || '',
+        name: personById?.name || '',
         lastName: personById?.lastName || '',
         dateOfBirth: personById?.dateOfBirth ? new Date(personById.dateOfBirth) : new Date(), // Use new Date() para establecer la fecha actual por defecto
         address: personById?.address || '',
@@ -30,7 +30,7 @@ export default function FormPeople({showModal,handleClose,idSelected}) {
 
 
     const validationSchema = Yup.object().shape({
-      firstName: Yup.string()
+      name: Yup.string()
         .min(3, 'Nombre demasiado corto!')
         .max(50, 'Nombre demasiado largo!')
         .required('El nombre es obligatorio!'),
@@ -58,8 +58,13 @@ export default function FormPeople({showModal,handleClose,idSelected}) {
     });
     
 
-    const handleSubmit = (values) => {
-        console.log(values)
+    const handleSubmit =async  (values) => {
+        if(idSelected){
+            const response =await dispatch(updatePerson({id:idSelected,values}));
+            console.log(response)
+            dispatch(getAllPeople());
+
+        }
     }
 
 
@@ -82,12 +87,12 @@ return (
                     {({ errors, touched ,values, handleChange}) => (
                         <Form>
                             <div className="form-group">
-                                <label htmlFor="firstName">First Name</label>
-                                <Field name="firstName" className={`form-control ${errors.firstName && touched.firstName ? 'is-invalid' : ''}`} />
-                                <ErrorMessage name="firstName" component="div" className="invalid-feedback" />
+                                <label htmlFor="name">Nombre</label>
+                                <Field name="name" className={`form-control ${errors.name && touched.name ? 'is-invalid' : ''}`} />
+                                <ErrorMessage name="name" component="div" className="invalid-feedback" />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="lastName">Last Name</label>
+                                <label htmlFor="lastName">Apellido</label>
                                 <Field name="lastName" className={`form-control ${errors.lastName && touched.lastName ? 'is-invalid' : ''}`} />
                                 <ErrorMessage name="lastName" component="div" className="invalid-feedback" />
                             </div>
