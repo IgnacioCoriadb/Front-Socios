@@ -2,7 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllPeople } from '../../redux/people/actions';
 import React, { useEffect ,useState} from 'react';
 import { format } from 'date-fns';
-// import EditPeople from './EditPeople';
+import FormPeople from './formPeople';
+import { Modal, Button } from 'react-bootstrap';
 
 
 export default function People() {
@@ -11,17 +12,20 @@ const dispatch = useDispatch();
 const people = useSelector(state => state.people.people);
 const error = useSelector(state => state.people.error);
 const loading = useSelector(state => state.people.loading);
-//abrir  y cerar modal 
-const [showModal, setShowModal] = useState(false);
-const handleOpenModal = () => setShowModal(true);
-const handleCloseModal = () => setShowModal(false);
 const [idSelected, setIdSelected] =useState(null);
+
+const [showModal, setShowModal] = useState(false);
+
+const handleClose = () => setShowModal(false);
+const handleShow = () => setShowModal(true);
+
+
 
 //enviar id a editar
 const handlePerson=(id)=>{
   console.log(id);
+  handleShow();
   setIdSelected(id);
-  setShowModal(true);
 }
 
 useEffect(() => {
@@ -69,7 +73,9 @@ useEffect(() => {
             }
         </tbody>
       </table>  
-      {/* <EditPeople  show={showModal} handleClose={handleCloseModal} idSelected={idSelected}></EditPeople> */}
+      <div>
+        <FormPeople showModal={showModal} handleClose={handleClose}></FormPeople>
+      </div>
     </div>
   )
 }
